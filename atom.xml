@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lewisxhe.github.io</id>
     <title>Lewis小站</title>
-    <updated>2020-08-05T07:50:53.828Z</updated>
+    <updated>2020-08-05T08:15:09.732Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lewisxhe.github.io"/>
     <link rel="self" href="https://lewisxhe.github.io/atom.xml"/>
@@ -69,7 +69,7 @@ GPS 和 Beaconing 把它全部注释掉，不注释也不影响，根据需求�
 <h1 id="参考">参考:</h1>
 <h3 id="官方源码">官方源码</h3>
 <blockquote>
-<p>git clone https://github.com/Lora-net/sx1302_hal.git</p>
+<p>https://github.com/Lora-net/sx1302_hal.git</p>
 </blockquote>
 <h3 id="rejeee-修改的源码">Rejeee 修改的源码</h3>
 <blockquote>
