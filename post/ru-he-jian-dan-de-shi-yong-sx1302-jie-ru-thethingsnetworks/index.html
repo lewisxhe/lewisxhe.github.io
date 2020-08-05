@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>如何简单的使用SX1302接入TheThingsNetworks | Lewis小站</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://lewisxhe.github.io/favicon.ico?v=1596613045442">
+<link rel="stylesheet" href="https://lewisxhe.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1.编译
+- 默认生产目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+- cd sx1302_hal
+- make clean all            #生成执行文件
+- make install         ..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://lewisxhe.github.io">
+        <img src="https://lewisxhe.github.io/images/avatar.png?v=1596613045442" class="site-logo">
+        <h1 class="site-title">Lewis小站</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lewisxhe.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">如何简单的使用SX1302接入TheThingsNetworks</h2>
+            <div class="post-date">2020-08-05</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="1编译">1.编译</h2>
+<pre><code>- 默认生产目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+- cd sx1302_hal
+- make clean all            #生成执行文件
+- make install              #将编译的执行文件拷贝到目标目录
+- make install_conf         #拷贝默认的配置文件到目标目录 
+- cd bin                    #进入目标目录
+- cp global_conf.json.sx1250.EU868 global_conf.json   
+    拷贝lora网关的对应的配置文件,我购买的是EU868的,所以将`global_conf.json.sx1250.EU868`重命名为`global_conf.json`
+</code></pre>
+<h2 id="2生成getgateway-id">2.生成getGateway ID</h2>
+<pre><code>- cd ..
+- chmod +x getGatewayID.sh
+- ./getGatewayID.sh         #这个将生产GatewayID，将他记录下来替换global_conf.json中的`gateway_ID`字段
+</code></pre>
+<h2 id="3修改配置文件">3.修改配置文件</h2>
+<pre><code>- vim global_conf.json 
+
+`gateway_ID`字段，替换为运行./getGatewayID.sh生成的字符串
+
+`server_address`字段 填写为你要连接的服务器，这里我使用TTN的服务器,IP地址我使用亚太服务器的地址为&quot;router.eu.thethings.network&quot;,
+
+`serv_port_up` 为服务器的上行端口，TTN默认为1700
+
+`serv_port_down` 为服务器的下行端口，TTN默认为1700
+
+GPS 和 Beaconing 把它全部注释掉，不注释也不影响，根据需求自己调整，因为我没有使用GPS所以这些都没用 
+
+其他暂时不做更改，保持默认,Shift + ZZ 保存
+</code></pre>
+<h2 id="4测试包转发">4.测试包转发</h2>
+<pre><code>./lora_pkt_fwd global_conf.json    #如果无误，那么它将顺利的启动
+</code></pre>
+<h2 id="5在ttn中创建网关">5.在TTN中创建网关</h2>
+<pre><code>1. https://console.thethingsnetwork.org/gateways/register
+2. 勾选`I'm using the legacy packet forwarder`，用旧式包转发器
+3. 在`Gateway EUI`中填入配置文件中的`gateway_ID`
+4. `Description`一栏任意写点什么
+5. `Frequency Plan` 根据实际使用频率配置
+6. `Router`选择与自己最接近的地区
+7. 填写完成点击`Register Gateway`完成创建
+</code></pre>
+<p>下图是我的配置截图<br>
+<img src="https://lewisxhe.github.io/post-images/1596612891656.jpg" alt="" loading="lazy"></p>
+<h2 id="6-查看网关连接状态">6. 查看网关连接状态</h2>
+<p>点击网页右上方Gateways,然后显示已经注册的网关，点击刚才创建的网关，即可查看网关是否已经连接上,下图为连接状态,可以看到status显示为connected,至此简单的使用包转发接入TTN就完成了<br>
+<img src="https://lewisxhe.github.io/post-images/1596612897753.jpg" alt="" loading="lazy"></p>
+<p>以上步骤全部基于https://github.com/lewisxhe/sx1302_hal ,官方和Rejeee的有稍微的区别</p>
+<p>转载需注明出处</p>
+<h1 id="参考">参考:</h1>
+<h3 id="官方源码">官方源码</h3>
+<blockquote>
+<p>git clone https://github.com/Lora-net/sx1302_hal.git</p>
+</blockquote>
+<h3 id="rejeee-修改的源码">Rejeee 修改的源码</h3>
+<blockquote>
+<p>https://gitee.com/rejeee/gw1302s.git</p>
+</blockquote>
+<h3 id="rejeee的使用指南">Rejeee的使用指南</h3>
+<blockquote>
+<p>https://www.cnblogs.com/answerinthewind/p/13154904.html</p>
+</blockquote>
+<h3 id="我修改过的源码基于官方去除scp操作更改为直接拷贝移除传感器禁用引起的警告">我修改过的源码，基于官方,去除SCP操作，更改为直接拷贝，移除传感器禁用引起的警告</h3>
+<blockquote>
+<p>https://github.com/lewisxhe/sx1302_hal.git</p>
+</blockquote>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://lewisxhe.github.io/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
