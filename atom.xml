@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lewisxhe.github.io</id>
     <title>Lewis小站</title>
-    <updated>2020-08-05T07:38:24.410Z</updated>
+    <updated>2020-08-05T07:42:58.212Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lewisxhe.github.io"/>
     <link rel="self" href="https://lewisxhe.github.io/atom.xml"/>
@@ -17,7 +17,7 @@
         </link>
         <updated>2020-08-05T07:33:20.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1编译">1.编译</h2>
-<pre><code>- 默认生产目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+<pre><code>- 默认生成目标文件在`target.cfg`文件中配置,可以根据需要进行更改
 - cd sx1302_hal
 - make clean all            #生成执行文件
 - make install              #将编译的执行文件拷贝到目标目录
