@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lewisxhe.github.io</id>
     <title>Lewis小站</title>
-    <updated>2020-08-05T07:42:58.212Z</updated>
+    <updated>2020-08-05T07:50:53.828Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lewisxhe.github.io"/>
     <link rel="self" href="https://lewisxhe.github.io/atom.xml"/>
@@ -18,6 +18,7 @@
         <updated>2020-08-05T07:33:20.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1编译">1.编译</h2>
 <pre><code>- 默认生成目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+- git clone  https://github.com/lewisxhe/sx1302_hal.git
 - cd sx1302_hal
 - make clean all            #生成执行文件
 - make install              #将编译的执行文件拷贝到目标目录
@@ -29,7 +30,7 @@
 <h2 id="2生成getgateway-id">2.生成getGateway ID</h2>
 <pre><code>- cd ..
 - chmod +x getGatewayID.sh
-- ./getGatewayID.sh         #这个将生产GatewayID，将他记录下来替换global_conf.json中的`gateway_ID`字段
+- ./getGatewayID.sh         #这个将生成GatewayID，将他记录下来替换global_conf.json中的`gateway_ID`字段
 </code></pre>
 <h2 id="3修改配置文件">3.修改配置文件</h2>
 <pre><code>- vim global_conf.json 

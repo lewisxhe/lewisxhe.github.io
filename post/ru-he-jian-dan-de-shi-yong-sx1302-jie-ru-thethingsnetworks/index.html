@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://lewisxhe.github.io/favicon.ico?v=1596613375470">
+<link rel="shortcut icon" href="https://lewisxhe.github.io/favicon.ico?v=1596613851879">
 <link rel="stylesheet" href="https://lewisxhe.github.io/styles/main.css">
 
 
@@ -20,9 +20,9 @@
 
     <meta name="description" content="1.编译
 - 默认生成目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+- git clone  https://github.com/lewisxhe/sx1302_hal.git
 - cd sx1302_hal
-- make clean all            #生成执行文件
-- make install         ..." />
+- m..." />
     <meta name="keywords" content="" />
   </head>
   <body>
@@ -32,7 +32,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://lewisxhe.github.io">
-        <img src="https://lewisxhe.github.io/images/avatar.png?v=1596613375470" class="site-logo">
+        <img src="https://lewisxhe.github.io/images/avatar.png?v=1596613851879" class="site-logo">
         <h1 class="site-title">Lewis小站</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -100,6 +100,7 @@
             <div class="post-content" v-pre>
               <h2 id="1编译">1.编译</h2>
 <pre><code>- 默认生成目标文件在`target.cfg`文件中配置,可以根据需要进行更改
+- git clone  https://github.com/lewisxhe/sx1302_hal.git
 - cd sx1302_hal
 - make clean all            #生成执行文件
 - make install              #将编译的执行文件拷贝到目标目录
@@ -111,7 +112,7 @@
 <h2 id="2生成getgateway-id">2.生成getGateway ID</h2>
 <pre><code>- cd ..
 - chmod +x getGatewayID.sh
-- ./getGatewayID.sh         #这个将生产GatewayID，将他记录下来替换global_conf.json中的`gateway_ID`字段
+- ./getGatewayID.sh         #这个将生成GatewayID，将他记录下来替换global_conf.json中的`gateway_ID`字段
 </code></pre>
 <h2 id="3修改配置文件">3.修改配置文件</h2>
 <pre><code>- vim global_conf.json 
